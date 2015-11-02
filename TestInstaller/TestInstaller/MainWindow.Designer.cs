@@ -38,9 +38,9 @@
             // 
             // InstallButton
             // 
-            this.InstallButton.Location = new System.Drawing.Point(14, 84);
+            this.InstallButton.Location = new System.Drawing.Point(20, 135);
             this.InstallButton.Name = "InstallButton";
-            this.InstallButton.Size = new System.Drawing.Size(75, 23);
+            this.InstallButton.Size = new System.Drawing.Size(75, 20);
             this.InstallButton.TabIndex = 0;
             this.InstallButton.Text = "Install";
             this.InstallButton.UseVisualStyleBackColor = true;
@@ -48,10 +48,9 @@
             // 
             // ForgeInstall
             // 
-            this.ForgeInstall.AutoSize = true;
-            this.ForgeInstall.Location = new System.Drawing.Point(14, 38);
+            this.ForgeInstall.Location = new System.Drawing.Point(20, 85);
             this.ForgeInstall.Name = "ForgeInstall";
-            this.ForgeInstall.Size = new System.Drawing.Size(162, 17);
+            this.ForgeInstall.Size = new System.Drawing.Size(165, 20);
             this.ForgeInstall.TabIndex = 1;
             this.ForgeInstall.Text = "MinecraftForge Version 1291";
             this.ForgeInstall.UseVisualStyleBackColor = true;
@@ -59,10 +58,9 @@
             // 
             // EDMInstall
             // 
-            this.EDMInstall.AutoSize = true;
-            this.EDMInstall.Location = new System.Drawing.Point(14, 61);
+            this.EDMInstall.Location = new System.Drawing.Point(20, 110);
             this.EDMInstall.Name = "EDMInstall";
-            this.EDMInstall.Size = new System.Drawing.Size(189, 17);
+            this.EDMInstall.Size = new System.Drawing.Size(190, 20);
             this.EDMInstall.TabIndex = 2;
             this.EDMInstall.Text = "Extra Diamonds Mod Version 4.1.0";
             this.EDMInstall.UseVisualStyleBackColor = true;
@@ -70,16 +68,16 @@
             // 
             // FileLocation
             // 
-            this.FileLocation.Location = new System.Drawing.Point(12, 12);
+            this.FileLocation.Location = new System.Drawing.Point(20, 60);
             this.FileLocation.Name = "FileLocation";
-            this.FileLocation.Size = new System.Drawing.Size(229, 20);
+            this.FileLocation.Size = new System.Drawing.Size(230, 20);
             this.FileLocation.TabIndex = 3;
             // 
             // FindButton
             // 
-            this.FindButton.Location = new System.Drawing.Point(247, 12);
+            this.FindButton.Location = new System.Drawing.Point(255, 60);
             this.FindButton.Name = "FindButton";
-            this.FindButton.Size = new System.Drawing.Size(27, 23);
+            this.FindButton.Size = new System.Drawing.Size(25, 20);
             this.FindButton.TabIndex = 4;
             this.FindButton.Text = "...";
             this.FindButton.UseVisualStyleBackColor = true;
@@ -93,7 +91,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(304, 121);
+            this.ClientSize = new System.Drawing.Size(304, 161);
             this.Controls.Add(this.FindButton);
             this.Controls.Add(this.FileLocation);
             this.Controls.Add(this.EDMInstall);
