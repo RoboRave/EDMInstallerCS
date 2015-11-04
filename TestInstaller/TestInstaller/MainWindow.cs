@@ -103,5 +103,17 @@ namespace TestInstaller
                 Console.WriteLine("Oops!! Something went wrong!!");
             }
         }
+
+        private void VersionSelector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (VersionSelector.SelectedItem.ToString() == "1.8")
+            {
+                Console.WriteLine("hi");
+            }
+            if(VersionSelector.SelectedItem.ToString() == "1.7.10")
+            {
+                Console.WriteLine("hello");
+            }
+        }
     }
 }

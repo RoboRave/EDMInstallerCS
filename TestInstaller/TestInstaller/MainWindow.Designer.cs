@@ -34,6 +34,7 @@
             this.FileLocation = new System.Windows.Forms.TextBox();
             this.FindButton = new System.Windows.Forms.Button();
             this.FolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
+            this.VersionSelector = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // InstallButton
@@ -87,11 +88,26 @@
             // 
             this.FolderBrowser.HelpRequest += new System.EventHandler(this.FolderBrowser_HelpRequest);
             // 
+            // VersionSelector
+            // 
+            this.VersionSelector.FormattingEnabled = true;
+            this.VersionSelector.Items.AddRange(new object[] {
+            "1.8",
+            "1.7.10",
+            "1.7.2"});
+            this.VersionSelector.Location = new System.Drawing.Point(20, 20);
+            this.VersionSelector.Name = "VersionSelector";
+            this.VersionSelector.Size = new System.Drawing.Size(230, 21);
+            this.VersionSelector.TabIndex = 5;
+            this.VersionSelector.Text = "Minecraft version";
+            this.VersionSelector.SelectedIndexChanged += new System.EventHandler(this.VersionSelector_SelectedIndexChanged);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(304, 161);
+            this.Controls.Add(this.VersionSelector);
             this.Controls.Add(this.FindButton);
             this.Controls.Add(this.FileLocation);
             this.Controls.Add(this.EDMInstall);
@@ -113,6 +129,7 @@
         private System.Windows.Forms.TextBox FileLocation;
         private System.Windows.Forms.Button FindButton;
         private System.Windows.Forms.FolderBrowserDialog FolderBrowser;
+        private System.Windows.Forms.ComboBox VersionSelector;
     }
 }
 
