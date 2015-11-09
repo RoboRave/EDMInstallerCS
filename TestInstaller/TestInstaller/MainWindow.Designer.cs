@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.InstallButton = new System.Windows.Forms.Button();
             this.ForgeInstall = new System.Windows.Forms.CheckBox();
-            this.EDMInstall = new System.Windows.Forms.CheckBox();
+            this.ModInstall = new System.Windows.Forms.CheckBox();
             this.FileLocation = new System.Windows.Forms.TextBox();
             this.FindButton = new System.Windows.Forms.Button();
             this.FolderBrowser = new System.Windows.Forms.FolderBrowserDialog();
@@ -51,21 +52,21 @@
             // 
             this.ForgeInstall.Location = new System.Drawing.Point(20, 85);
             this.ForgeInstall.Name = "ForgeInstall";
-            this.ForgeInstall.Size = new System.Drawing.Size(165, 20);
+            this.ForgeInstall.Size = new System.Drawing.Size(230, 20);
             this.ForgeInstall.TabIndex = 1;
-            this.ForgeInstall.Text = "MinecraftForge Version 1291";
+            this.ForgeInstall.Text = "MinecraftForge";
             this.ForgeInstall.UseVisualStyleBackColor = true;
             this.ForgeInstall.CheckedChanged += new System.EventHandler(this.ForgeInstall_CheckedChanged);
             // 
-            // EDMInstall
+            // ModInstall
             // 
-            this.EDMInstall.Location = new System.Drawing.Point(20, 110);
-            this.EDMInstall.Name = "EDMInstall";
-            this.EDMInstall.Size = new System.Drawing.Size(190, 20);
-            this.EDMInstall.TabIndex = 2;
-            this.EDMInstall.Text = "Extra Diamonds Mod Version 4.1.0";
-            this.EDMInstall.UseVisualStyleBackColor = true;
-            this.EDMInstall.CheckedChanged += new System.EventHandler(this.EDMInstall_CheckedChanged);
+            this.ModInstall.Location = new System.Drawing.Point(20, 110);
+            this.ModInstall.Name = "ModInstall";
+            this.ModInstall.Size = new System.Drawing.Size(230, 20);
+            this.ModInstall.TabIndex = 2;
+            this.ModInstall.Text = "Default";
+            this.ModInstall.UseVisualStyleBackColor = true;
+            this.ModInstall.CheckedChanged += new System.EventHandler(this.ModInstall_CheckedChanged);
             // 
             // FileLocation
             // 
@@ -110,12 +111,13 @@
             this.Controls.Add(this.VersionSelector);
             this.Controls.Add(this.FindButton);
             this.Controls.Add(this.FileLocation);
-            this.Controls.Add(this.EDMInstall);
+            this.Controls.Add(this.ModInstall);
             this.Controls.Add(this.ForgeInstall);
             this.Controls.Add(this.InstallButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainWindow";
-            this.Text = "EDM Installer For Minecraft 1.7.10";
+            this.Text = "Mod Installer For Minecraft";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,7 +127,7 @@
 
         private System.Windows.Forms.Button InstallButton;
         private System.Windows.Forms.CheckBox ForgeInstall;
-        private System.Windows.Forms.CheckBox EDMInstall;
+        private System.Windows.Forms.CheckBox ModInstall;
         private System.Windows.Forms.TextBox FileLocation;
         private System.Windows.Forms.Button FindButton;
         private System.Windows.Forms.FolderBrowserDialog FolderBrowser;

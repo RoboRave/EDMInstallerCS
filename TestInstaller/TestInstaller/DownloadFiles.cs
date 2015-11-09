@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EDMInstaller;
+using System;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
@@ -7,17 +8,29 @@ namespace TestInstaller
 {
     internal class DownloadFiles
     {
-        public static void downloadEDM()
+        public static void downloadMod()
         {
-            if (File.Exists(Application.StartupPath + "/EDM.jar"))
+            if (File.Exists(Application.StartupPath + "/"+Props.Jar + "-" + Props.Version1_8+".jar"))
             {
                 MessageBox.Show("Hey, You Already Downloaded it. Moving file.");
+            }
+            else if (File.Exists(Application.StartupPath + "/" + Props.Jar + "-" + Props.Version1_7 + ".jar"))
+            {
+                    MessageBox.Show("Hey, You Already Downloaded it. Moving file.");
             }
             else
             {
                 using (var client = new WebClient())
                 {
-                    client.DownloadFile("http://addons-origin.cursecdn.com/files/2237/271/[1.7.10]EDM-4.1.0-Universal.jar", "EDM.jar");
+                    if (MainWindow.V1_8)
+                    {
+                        client.DownloadFile(Props.URL1_8, Props.Jar + "-" + Props.Version1_8 + ".jar");
+                    }
+                    else if (MainWindow.V1_7 == true)
+                    {
+                        client.DownloadFile(Props.URL1_7, Props.Jar + "-" + Props.Version1_7 + ".jar");
+                    }
+                    
                 }
             }
         }
@@ -32,7 +45,14 @@ namespace TestInstaller
             {
                 using (var client = new WebClient())
                 {
-                    client.DownloadFile("http://files.minecraftforge.net/maven/net/minecraftforge/forge/1.7.10-10.13.2.1291/forge-1.7.10-10.13.2.1291-installer-win.exe", "forge.exe");
+                    if (MainWindow.V1_8 == true)
+                    {
+                        Console.WriteLine("http://files.minecraftforge.net/maven/net/minecraftforge/forge/" + ForgeProps.Version1_8 + "/forge-" + ForgeProps.Version1_8 + "-installer-win.exe");
+                        client.DownloadFile("http://files.minecraftforge.net/maven/net/minecraftforge/forge/"+ForgeProps.Version1_8 +"/forge-"+ForgeProps.Version1_8+"-installer-win.exe", "forge.exe");
+                    }else if(MainWindow.V1_7 == true)
+                    {
+                        client.DownloadFile("http://files.minecraftforge.net/maven/net/minecraftforge/forge/"+ForgeProps.Version1_7 + "/forge-" + ForgeProps.Version1_7 +"-installer-win.exe", "forge.exe");
+                    }
                     Console.WriteLine("Downloaded Forge");
                 }
             }

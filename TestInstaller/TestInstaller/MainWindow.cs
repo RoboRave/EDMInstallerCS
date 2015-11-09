@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic.FileIO;
+﻿using EDMInstaller;
+using Microsoft.VisualBasic.FileIO;
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -8,12 +9,30 @@ namespace TestInstaller
     public partial class MainWindow : Form
     {
         private string InstallLocation = "Install Location";
+        public static string filename = Application.StartupPath + "/mod.properties";
+        public static string Forge = Application.StartupPath + "/forge.properties";
+        public static bool V1_8;
+        public static bool V1_7;
+
 
         public MainWindow()
         {
             InitializeComponent();
+            SetModDetails();
             Json.genDefaults();
             Json.instance.run();
+        }
+
+        /// <summary>
+        /// getting names from file
+        /// </summary>
+        public void SetModDetails()
+        {
+            Props.Load(filename);
+            ForgeProps.Load(Forge);
+            
+            ModInstall.Text = Props.Name;
+            ForgeInstall.Text = ForgeProps.Name;
         }
 
         private void FindButton_Click(object sender, EventArgs e)
@@ -36,52 +55,68 @@ namespace TestInstaller
         {
             if (ForgeInstall.Checked)
             {
-                Json.config.value = "true";
+                Json.forge.value = "true";
                 Json.instance.run();
-                Console.WriteLine(Json.config.value.ToString());
+                Console.WriteLine(Json.forge.value.ToString());
             }
             else
             {
-                Json.config.value = "false";
+                Json.forge.value = "false";
                 Json.instance.run();
-                Console.WriteLine(Json.config.value.ToString());
+                Console.WriteLine(Json.forge.value.ToString());
             }
         }
 
-        private void EDMInstall_CheckedChanged(object sender, EventArgs e)
+        private void ModInstall_CheckedChanged(object sender, EventArgs e)
         {
-            if (EDMInstall.Checked)
+            if (ModInstall.Checked)
             {
-                Json.es.value = "true";
+                Json.mod.value = "true";
                 Json.instance.run();
-                Console.WriteLine(Json.es.value.ToString());
+                Console.WriteLine(Json.mod.value.ToString());
             }
             else
             {
-                Json.es.value = "false";
+                Json.mod.value = "false";
                 Json.instance.run();
-                Console.WriteLine(Json.es.value.ToString());
+                Console.WriteLine(Json.mod.value.ToString());
             }
         }
 
         private void InstallButton_Click(object sender, EventArgs e)
         {
-            if (Json.es.value == "true")
+            if (Json.mod.value == "true")
             {
                 Console.WriteLine("It Worked!!!");
-                if (!File.Exists(Application.StartupPath + "/EDM.jar"))
+                if (!File.Exists(Application.StartupPath + "/" + Props.Jar + "-" + Props.Version1_8 + ".jar"))
                 {
-                    DownloadFiles.downloadEDM();
+                    DownloadFiles.downloadMod();
+                }
+                else if (!File.Exists(Application.StartupPath + "/" + Props.Jar + "-" + Props.Version1_7 + ".jar"))
+                {
+                    DownloadFiles.downloadMod();
                 }
                 else
                 {
                     MessageBox.Show("Already Downloaded. Moving file...");
                 }
 
-                if (!File.Exists(InstallLocation + "/mods/EDM.jar"))
+                if (!File.Exists(InstallLocation + "/mods/1.8/" + Props.Jar + "-" + Props.Version1_8 + ".jar"))
                 {
-                    FileSystem.MoveFile(Application.StartupPath + "/EDM.jar", InstallLocation + "/mods/EDM.jar", UIOption.AllDialogs, UICancelOption.DoNothing);
-                    //File.Move(Application.StartupPath + "/EDM.jar", InstallLocation + "/mods/EDM.jar");
+                    if (MainWindow.V1_8 == true)
+                    {
+                        Directory.CreateDirectory(InstallLocation + "/mods/1.8/");
+                        File.Move(Application.StartupPath + "/" + Props.Jar + "-" + Props.Version1_8 + ".jar", InstallLocation + "/mods/1.8/" + Props.Jar + "-" + Props.Version1_8 + ".jar");
+                    }
+                    
+                }
+                else if (!File.Exists(InstallLocation + "/mods/1.7.10/" + Props.Jar + "-" + Props.Version1_7 + ".jar"))
+                {
+                    if (MainWindow.V1_7 == true)
+                    {
+                        Directory.CreateDirectory(InstallLocation + "/mods/1.7.10/");
+                        File.Move(Application.StartupPath + "/" + Props.Jar + "-" + Props.Version1_7 + ".jar", InstallLocation + "/mods/1.7.10" + Props.Jar + "-" + Props.Version1_7 + ".jar");
+                    }
                 }
                 else
                 {
@@ -90,10 +125,10 @@ namespace TestInstaller
             }
             else
             {
-                Console.WriteLine("Oops!! Something went wrong!! " + Json.es.name.ToString() + " was not vaild or the config was tampered with, so no install happened.");
+                Console.WriteLine("Oops!! Something went wrong!! " + Json.mod.name.ToString() + " was not vaild or the config was tampered with, so no install happened.");
             }
 
-            if (Json.config.value == "true")
+            if (Json.forge.value == "true")
             {
                 DownloadFiles.DownloadForge();
                 System.Diagnostics.Process.Start(Application.StartupPath + "/forge.exe");
@@ -108,12 +143,23 @@ namespace TestInstaller
         {
             if (VersionSelector.SelectedItem.ToString() == "1.8")
             {
-                Console.WriteLine("hi");
+                Console.WriteLine("Version set to 1.8");
+                V1_8 = true;
+                V1_7 = false;
+                Console.WriteLine(V1_8.ToString());
+                ModInstall.Text = Props.Name +" "+ Props.Version1_8;
+                ForgeInstall.Text = ForgeProps.Name + " " + ForgeProps.Version1_8;
+
             }
-            if(VersionSelector.SelectedItem.ToString() == "1.7.10")
+            if (VersionSelector.SelectedItem.ToString() == "1.7.10")
             {
-                Console.WriteLine("hello");
-            }
+                Console.WriteLine("Version set to 1.7.10");
+                V1_8 = false;
+                V1_7 = true;
+                Console.WriteLine(V1_7.ToString());
+                ModInstall.Text = Props.Name + " " + Props.Version1_7;
+                ForgeInstall.Text = ForgeProps.Name + " " + ForgeProps.Version1_7;
+            }    
         }
     }
 }

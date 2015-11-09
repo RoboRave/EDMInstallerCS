@@ -1,6 +1,6 @@
 ﻿namespace TestInstaller
 {
-    public class EDMI
+    public class Mod
     {
         public string name { get; set; }
 

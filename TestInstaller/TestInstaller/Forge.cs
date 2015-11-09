@@ -1,6 +1,6 @@
 ﻿namespace TestInstaller
 {
-    public class Config
+    public class Forge
     {
         public string name { get; set; }
 

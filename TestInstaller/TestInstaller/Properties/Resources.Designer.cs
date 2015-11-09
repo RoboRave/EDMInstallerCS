@@ -59,5 +59,25 @@ namespace EDMInstaller.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] forge {
+            get {
+                object obj = ResourceManager.GetObject("forge", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] mod {
+            get {
+                object obj = ResourceManager.GetObject("mod", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
