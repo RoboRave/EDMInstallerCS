@@ -1,0 +1,12 @@
+language: csharp
+solution: TestInstaller/TestInstaller.sln
+install:
+  - nuget install Newtonsoft.Json -Version 7.0.1 -OutputDirectory packages/Newtonsoft
+script:
+  - build_number=$TRAVIS_BUILD_NUMBER
+  - version_number=0.9.0
+  - xbuild /p:Configuration=Release TestInstaller/TestInstaller.sln
+  - mono TestInstaller/packages/Newtonsoft.Json.7.0.1/lib/net45/Newtonsoft.Json.dll TestInstaller/TestInstaller/bin/Debug/EDMInstaller.exe
+  - zip -r build.zip src TestInstaller/TestInstaller/bin/Debug/EDMInstaller.exe readme.md
+after_success:
+  - curl --data "version=${version_number}&build=${build_number}&update_key=${travis_update_key}" ${travis_update_url}

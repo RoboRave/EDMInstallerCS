@@ -1,5 +1,4 @@
 ﻿using EDMInstaller;
-using Microsoft.VisualBasic.FileIO;
 using System;
 using System.IO;
 using System.Windows.Forms;
