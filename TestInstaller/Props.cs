@@ -13,7 +13,22 @@ namespace EDMInstaller
         public static string URL1_7;
         private static JavaProperties props = new JavaProperties();
         private static FileStream stream = null;
+        public static string[] text = {"mod.name=example","mod.version1_8=1.0.0","mod.version1_7=1.0.0","mod.jar=example","mod.url1_8=none","mod.url1_7=none" };
         public static void Load(string FileName)
+        {
+            if (!File.Exists(FileName))
+            {
+                Console.WriteLine("ERROR!! " + FileName + " was not found. generating one with default values");
+                File.Create(FileName);
+                File.WriteAllLines(FileName, text);
+            }
+            else
+            {
+                Console.WriteLine("found mod properties file.");
+                propsFile(FileName);
+            }
+        }
+        public static void propsFile(string FileName)
         {
             try
             {
