@@ -7,6 +7,9 @@ namespace TestInstaller
 {
     public partial class MainWindow : Form
     {
+        /**
+        * The installLocation for mod
+        **/
         private string InstallLocation = "Install Location";
         public static string filename = Application.StartupPath + "/mod.properties";
         public static string Forge = Application.StartupPath + "/forge.properties";
