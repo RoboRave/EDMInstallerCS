@@ -2,21 +2,18 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
-
 namespace TestInstaller
 {
     public partial class MainWindow : Form
     {
         /**
-        * The installLocation for mod
+        * The InstallLocation for mod
         **/
         private string InstallLocation = "Install Location";
         public static string filename = Application.StartupPath + "/mod.properties";
         public static string Forge = Application.StartupPath + "/forge.properties";
         public static bool V1_8;
         public static bool V1_7;
-
-
         public MainWindow()
         {
             InitializeComponent();
@@ -24,7 +21,6 @@ namespace TestInstaller
             Json.genDefaults();
             Json.instance.run();
         }
-
         /// <summary>
         /// getting names from file
         /// </summary>
@@ -36,7 +32,6 @@ namespace TestInstaller
             ModInstall.Text = Props.Name;
             ForgeInstall.Text = ForgeProps.Name;
         }
-
         private void FindButton_Click(object sender, EventArgs e)
         {
             FolderBrowser.RootFolder = Environment.SpecialFolder.ApplicationData;
@@ -48,11 +43,9 @@ namespace TestInstaller
                 InstallLocation = FolderBrowser.SelectedPath;
             }
         }
-
+        //Unused for now
         private void FolderBrowser_HelpRequest(object sender, EventArgs e)
-        {
-        }
-
+        {}
         private void ForgeInstall_CheckedChanged(object sender, EventArgs e)
         {
             if (ForgeInstall.Checked)
@@ -68,7 +61,6 @@ namespace TestInstaller
                 Console.WriteLine(Json.forge.value.ToString());
             }
         }
-
         private void ModInstall_CheckedChanged(object sender, EventArgs e)
         {
             if (ModInstall.Checked)
@@ -84,12 +76,13 @@ namespace TestInstaller
                 Console.WriteLine(Json.mod.value.ToString());
             }
         }
-
+        //Main install
         private void InstallButton_Click(object sender, EventArgs e)
         {
             if (Json.mod.value == "true")
             {
                 Console.WriteLine("It Worked!!!");
+                //Find if the file has been downloaded
                 if (!File.Exists(Application.StartupPath + "/" + Props.Jar + "-" + Props.Version1_8 + ".jar"))
                 {
                     DownloadFiles.downloadMod();
@@ -102,7 +95,7 @@ namespace TestInstaller
                 {
                     MessageBox.Show("Already Downloaded. Moving file...");
                 }
-
+                //Install 1.8 version.
                 if (!File.Exists(InstallLocation + "/mods/1.8/" + Props.Jar + "-" + Props.Version1_8 + ".jar"))
                 {
                     if (MainWindow.V1_8 == true)
@@ -111,7 +104,7 @@ namespace TestInstaller
                         File.Move(Application.StartupPath + "/" + Props.Jar + "-" + Props.Version1_8 + ".jar", InstallLocation + "/mods/1.8/" + Props.Jar + "-" + Props.Version1_8 + ".jar");
                     }
                     
-                }
+                }//Install 1.7 version
                 else if (!File.Exists(InstallLocation + "/mods/1.7.10/" + Props.Jar + "-" + Props.Version1_7 + ".jar"))
                 {
                     if (MainWindow.V1_7 == true)
@@ -129,7 +122,7 @@ namespace TestInstaller
             {
                 Console.WriteLine("Oops!! Something went wrong!! " + Json.mod.name.ToString() + " was not vaild or the config was tampered with, so no install happened.");
             }
-
+            //Get forge for mod
             if (Json.forge.value == "true")
             {
                 DownloadFiles.DownloadForge();
@@ -140,7 +133,7 @@ namespace TestInstaller
                 Console.WriteLine("Oops!! Something went wrong!!");
             }
         }
-
+        //Main select box for version
         private void VersionSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (VersionSelector.SelectedItem.ToString() == "1.8")
