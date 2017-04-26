@@ -1,3 +1,4 @@
+//NONE OF THIS CODE IS OWNED BY ME. ALL CREDIT GOES TO WILLIAMS TECHNOLOGIES!!!!
 /*
  * Copyright 2009-15 Williams Technologies Limtied.
  *
@@ -17,7 +18,6 @@
  *
  * http://www.kajabity.com
  */
-
 using System;
 using System.Collections;
 using System.IO;
